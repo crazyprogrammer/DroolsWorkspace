@@ -28,7 +28,8 @@ public class MediclaimRuleTest {
 			mpm.setUserCoverage(true);
 			params.put("mpm", mpm);
 			ksession.startProcess("mediclaimrule",params);
-		
+			
+			ksession.insert(mpm);
 			ksession.fireAllRules();
 			
 		} catch (Throwable t) {

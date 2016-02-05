@@ -15,7 +15,7 @@
   <itemDefinition id="_userAge" structureRef="Integer" />
   <itemDefinition id="_mpm" structureRef="com.mediclaim.MediclaimProcessModel" />
   <itemDefinition id="null" structureRef="com.mediclaim.MediclaimProcessModel" />
-  <process processType="Private" isExecutable="true" id="mediclaimrule" name="mediclaimrule" >
+  <process processType="Private" isExecutable="true" id="mediclaimrule" name="mediclaimrule" tns:version="1" >
 
     <!-- process variables -->
     <property id="mpm" itemSubjectRef="null"/>

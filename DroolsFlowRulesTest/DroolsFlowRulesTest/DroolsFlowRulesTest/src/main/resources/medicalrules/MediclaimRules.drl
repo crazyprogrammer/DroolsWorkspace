@@ -6,7 +6,7 @@ rule "Check_User_Age"
 	
 	ruleflow-group "EvalAgeCondition"
 	when
-		$m : MediclaimProcessModel( result == false  )
+		$m : MediclaimProcessModel( userAge < 25  )
 	then
 		System.out.println("Hi !!");
 	    log("your age is less than 25");
