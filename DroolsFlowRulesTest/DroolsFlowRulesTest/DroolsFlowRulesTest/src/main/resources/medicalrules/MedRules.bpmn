@@ -44,47 +44,63 @@ kcontext.setVariable("userAge", userAge);</script>
     <scriptTask id="_jbpm-unique-6" name="Show Result" scriptFormat="http://www.java.com/java" >
       <script>System.out.println("Result is :  " + mpm.getResult());</script>
     </scriptTask>
+    <businessRuleTask id="_jbpm-unique-0" name="CoverageRule" g:ruleFlowGroup="EvalCoverageCondition" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
 
     <!-- connections -->
     <sequenceFlow id="_jbpm-unique-6-_jbpm-unique-2" sourceRef="_jbpm-unique-6" targetRef="_jbpm-unique-2" />
     <sequenceFlow id="_1-_jbpm-unique-3" sourceRef="_1" targetRef="_jbpm-unique-3" />
     <sequenceFlow id="_jbpm-unique-3-_jbpm-unique-5" sourceRef="_jbpm-unique-3" targetRef="_jbpm-unique-5" />
-    <sequenceFlow id="_jbpm-unique-5-_jbpm-unique-6" sourceRef="_jbpm-unique-5" targetRef="_jbpm-unique-6" />
+    <sequenceFlow id="_jbpm-unique-0-_jbpm-unique-6" sourceRef="_jbpm-unique-0" targetRef="_jbpm-unique-6" />
+    <sequenceFlow id="_jbpm-unique-5-_jbpm-unique-0" sourceRef="_jbpm-unique-5" targetRef="_jbpm-unique-0" />
 
   </process>
 
   <bpmndi:BPMNDiagram>
     <bpmndi:BPMNPlane bpmnElement="mediclaimrule" >
       <bpmndi:BPMNShape bpmnElement="_1" >
-        <dc:Bounds x="183" y="24" width="48" height="48" />
+        <dc:Bounds x="177" y="24" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-2" >
-        <dc:Bounds x="161" y="478" width="48" height="48" />
+        <dc:Bounds x="177" y="475" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-3" >
-        <dc:Bounds x="73" y="121" width="80" height="48" />
+        <dc:Bounds x="162" y="124" width="80" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-5" >
-        <dc:Bounds x="279" y="193" width="80" height="48" />
+        <dc:Bounds x="161" y="200" width="80" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-6" >
-        <dc:Bounds x="315" y="307" width="121" height="48" />
+        <dc:Bounds x="140" y="368" width="121" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-0" >
+        <dc:Bounds x="144" y="277" width="113" height="55" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-6-_jbpm-unique-2" >
-        <di:waypoint x="375" y="331" />
-        <di:waypoint x="185" y="502" />
+        <di:waypoint x="200" y="392" />
+        <di:waypoint x="201" y="499" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_1-_jbpm-unique-3" >
-        <di:waypoint x="207" y="48" />
-        <di:waypoint x="113" y="145" />
+        <di:waypoint x="201" y="48" />
+        <di:waypoint x="202" y="148" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-3-_jbpm-unique-5" >
-        <di:waypoint x="113" y="145" />
-        <di:waypoint x="319" y="217" />
+        <di:waypoint x="202" y="148" />
+        <di:waypoint x="201" y="224" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-5-_jbpm-unique-6" >
-        <di:waypoint x="319" y="217" />
-        <di:waypoint x="375" y="331" />
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-0-_jbpm-unique-6" >
+        <di:waypoint x="200" y="304" />
+        <di:waypoint x="200" y="392" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-5-_jbpm-unique-0" >
+        <di:waypoint x="201" y="224" />
+        <di:waypoint x="200" y="304" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
