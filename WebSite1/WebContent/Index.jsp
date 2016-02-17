@@ -27,7 +27,7 @@
 <jsp:useBean id="patients" class="com.example.website1.bean.MediclaimProcessModel">
 <jsp:setProperty name="patients" property="userName"/>
 <jsp:setProperty name="patients" property="userAge"/>
-<jsp:setProperty name="patients" property="Coverage"/>
+<jsp:setProperty name="patients" property="userCoverage"/>
 </jsp:useBean>
 
 		<script type="text/javascript">

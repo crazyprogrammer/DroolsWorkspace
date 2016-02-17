@@ -24,8 +24,8 @@ public class MediclaimRuleTest {
 			MediclaimProcessModel mpm = new MediclaimProcessModel();
 			
 			mpm.setUserName("Sudharshan");
-			mpm.setUserAge(23);
-			mpm.setUserCoverage(true);
+			mpm.setUserAge(26);
+			mpm.setUserCoverage(false);
 			params.put("mpm", mpm);
 			ksession.startProcess("mediclaimrule",params);
 			
