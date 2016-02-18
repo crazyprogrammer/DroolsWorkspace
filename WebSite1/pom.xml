@@ -3,7 +3,6 @@
   <groupId>WebSite1</groupId>
   <artifactId>WebSite1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
   
   <repositories>
     <repository>
