@@ -24,5 +24,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="E:/Sudharshan/Jars/Drools/kie-api-6.2.0.Final.jar"/>
 	<classpathentry kind="lib" path="E:/Sudharshan/Jars/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jbpm-droolsflow-drl"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

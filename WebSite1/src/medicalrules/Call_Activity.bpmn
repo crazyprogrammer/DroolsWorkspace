@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.trisotech.com/definitions/_1275486058980"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="_6" name="_6" >
+
+    <!-- nodes -->
+    <startEvent id="StartProcess" name=""  isInterrupting="false">
+    </startEvent>
+    <task id="TaskQuotationHandling" name="Quotation Handling" tns:taskName="" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+    <exclusiveGateway id="GatewayOrderApprovedDecision" name="" gatewayDirection="Diverging" >
+    </exclusiveGateway>
+    <task id="_6-190" name="Order  Handling" tns:taskName="" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+    <task id="_6-241" name="Shipping Handling" tns:taskName="" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+    <userTask id="TaskReviewOrder" name="Review Order" >
+      <ioSpecification>
+        <dataInput id="TaskReviewOrder_NodeNameInput" name="NodeName" />
+        <inputSet>
+          <dataInputRefs>TaskReviewOrder_NodeNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>TaskReviewOrder_NodeNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Review Order</from>
+          <to xsi:type="tFormalExpression">TaskReviewOrder_NodeNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
+    <endEvent id="EndProcess" name="" />
+    <parallelGateway id="ParaSplitOrderAndShipment" name="" gatewayDirection="Diverging" >
+    </parallelGateway>
+    <parallelGateway id="ParaJoinOderAndShipment" name="" gatewayDirection="Converging" >
+    </parallelGateway>
+    <endEvent id="TerminateProcess" name="" >
+        <terminateEventDefinition />
+    </endEvent>
+    <callActivity id="SubProcessApproveOrder" name="Approve Order" calledElement="_0" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </callActivity>
+
+    <!-- connections -->
+    <sequenceFlow id="StartProcess-TaskQuotationHandling" sourceRef="StartProcess" targetRef="TaskQuotationHandling" />
+    <sequenceFlow id="SubProcessApproveOrder-GatewayOrderApprovedDecision" sourceRef="SubProcessApproveOrder" targetRef="GatewayOrderApprovedDecision" />
+    <sequenceFlow id="ParaSplitOrderAndShipment-_6-190" sourceRef="ParaSplitOrderAndShipment" targetRef="_6-190" />
+    <sequenceFlow id="ParaSplitOrderAndShipment-_6-241" sourceRef="ParaSplitOrderAndShipment" targetRef="_6-241" />
+    <sequenceFlow id="ParaJoinOderAndShipment-TaskReviewOrder" sourceRef="ParaJoinOderAndShipment" targetRef="TaskReviewOrder" />
+    <sequenceFlow id="TaskReviewOrder-EndProcess" sourceRef="TaskReviewOrder" targetRef="EndProcess" />
+    <sequenceFlow id="GatewayOrderApprovedDecision-ParaSplitOrderAndShipment" sourceRef="GatewayOrderApprovedDecision" targetRef="ParaSplitOrderAndShipment" >
+      <conditionExpression xsi:type="tFormalExpression" ></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6-190-ParaJoinOderAndShipment" sourceRef="_6-190" targetRef="ParaJoinOderAndShipment" />
+    <sequenceFlow id="_6-241-ParaJoinOderAndShipment" sourceRef="_6-241" targetRef="ParaJoinOderAndShipment" />
+    <sequenceFlow id="GatewayOrderApprovedDecision-TerminateProcess" sourceRef="GatewayOrderApprovedDecision" targetRef="TerminateProcess" >
+      <conditionExpression xsi:type="tFormalExpression" ></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="TaskQuotationHandling-SubProcessApproveOrder" sourceRef="TaskQuotationHandling" targetRef="SubProcessApproveOrder" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="_6" >
+      <bpmndi:BPMNShape bpmnElement="StartProcess" >
+        <dc:Bounds x="129" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TaskQuotationHandling" >
+        <dc:Bounds x="112" y="96" width="83" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GatewayOrderApprovedDecision" >
+        <dc:Bounds x="129" y="296" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6-190" >
+        <dc:Bounds x="16" y="458" width="83" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6-241" >
+        <dc:Bounds x="131" y="458" width="83" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TaskReviewOrder" >
+        <dc:Bounds x="74" y="639" width="83" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndProcess" >
+        <dc:Bounds x="91" y="739" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParaSplitOrderAndShipment" >
+        <dc:Bounds x="89" y="377" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ParaJoinOderAndShipment" >
+        <dc:Bounds x="91" y="558" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TerminateProcess" >
+        <dc:Bounds x="170" y="377" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcessApproveOrder" >
+        <dc:Bounds x="112" y="196" width="83" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="StartProcess-TaskQuotationHandling" >
+        <di:waypoint x="153" y="40" />
+        <di:waypoint x="153" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcessApproveOrder-GatewayOrderApprovedDecision" >
+        <di:waypoint x="153" y="230" />
+        <di:waypoint x="153" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ParaSplitOrderAndShipment-_6-190" >
+        <di:waypoint x="113" y="401" />
+        <di:waypoint x="57" y="492" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ParaSplitOrderAndShipment-_6-241" >
+        <di:waypoint x="113" y="401" />
+        <di:waypoint x="172" y="492" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ParaJoinOderAndShipment-TaskReviewOrder" >
+        <di:waypoint x="115" y="582" />
+        <di:waypoint x="139" y="624" />
+        <di:waypoint x="115" y="673" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="TaskReviewOrder-EndProcess" >
+        <di:waypoint x="115" y="673" />
+        <di:waypoint x="117" y="723" />
+        <di:waypoint x="115" y="763" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GatewayOrderApprovedDecision-ParaSplitOrderAndShipment" >
+        <di:waypoint x="153" y="320" />
+        <di:waypoint x="113" y="401" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-190-ParaJoinOderAndShipment" >
+        <di:waypoint x="57" y="492" />
+        <di:waypoint x="85" y="558" />
+        <di:waypoint x="115" y="582" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-241-ParaJoinOderAndShipment" >
+        <di:waypoint x="172" y="492" />
+        <di:waypoint x="169" y="542" />
+        <di:waypoint x="115" y="582" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GatewayOrderApprovedDecision-TerminateProcess" >
+        <di:waypoint x="153" y="320" />
+        <di:waypoint x="194" y="401" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="TaskQuotationHandling-SubProcessApproveOrder" >
+        <di:waypoint x="153" y="130" />
+        <di:waypoint x="153" y="230" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
