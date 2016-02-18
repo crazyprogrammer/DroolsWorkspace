@@ -1,0 +1,32 @@
+package com.mediclaim
+
+import com.mediclaim.MediclaimProcessModel;
+
+rule "Check_User_Age"
+	
+	ruleflow-group "EvalAgeCondition"
+	when
+		$m : MediclaimProcessModel( userAge < 25  ) // your age is less than 25
+	then
+		System.out.println("Hi !!");
+		$m.setResult(true);
+		//update($m);
+end
+
+
+rule "Check_User_Coverage_Status"
+	
+	ruleflow-group "EvalCoverageCondition"
+	when
+		m:MediclaimProcessModel(userCoverage == true)
+	then
+		m.setResult(true);
+		//update($m);
+end
+
+
+
+function String log (String str)
+{
+return str + "";
+}
