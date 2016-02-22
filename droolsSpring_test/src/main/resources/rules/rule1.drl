@@ -1,0 +1,58 @@
+package com.sample
+ 
+import com.sample.MediclaimProcessModel;
+
+rule "Check_User_Age_in"
+	
+	when
+		$m : MediclaimProcessModel( userAge > 30  )
+	then
+		System.out.println("Your age is more than 30");
+		$m.setResult(false);
+end
+
+rule "Check_User_Age_out"
+	
+	when
+		$m : MediclaimProcessModel( userAge < 30  )
+	then
+		System.out.println("Your age is less than 30");
+		$m.setResult(true);
+end
+
+
+rule "Check_User_Coverage_Status_in"
+	
+	when
+		$m:MediclaimProcessModel(userCoverage == true)
+	then
+	   	System.out.println("You are covered under this medical insurance");
+		$m.setResult(true);
+end
+
+rule "Check_User_Coverage_Status_out"
+	
+	when
+		$m:MediclaimProcessModel(userCoverage == false)
+	then
+	   	System.out.println("You are not covered under this medical insurance");
+		$m.setResult(false);
+end
+
+rule "Check_User_Sex_in"
+	
+	when
+		$m:MediclaimProcessModel(userGender == "M")
+	then
+	   	System.out.println("Sorry this plan only covers womens");
+		$m.setResult(false);
+end
+
+rule "Check_User_Sex_out"
+	
+	when
+		$m:MediclaimProcessModel(userGender == "F")
+	then
+	   	System.out.println("Welcome Miss you are covered.");
+		$m.setResult(true);
+end
