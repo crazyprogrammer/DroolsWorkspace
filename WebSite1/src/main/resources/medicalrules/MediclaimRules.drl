@@ -8,7 +8,7 @@ rule "Check_User_Age"
 	when
 		$m : MediclaimProcessModel( userAge < 25  ) // your age is less than 25
 	then
-		System.out.println("Hi !!");
+		System.out.println("Hi !!" + $m.getUserAge());
 		$m.setResult(true);
 		//update($m);
 end

@@ -31,7 +31,9 @@
       <script>System.out.println("Hi " + mpm.getUserName());
 System.out.println(" Your age is:  " + mpm.getUserAge());
 
-kcontext.setVariable("userAge", userAge);</script>
+kcontext.setVariable("userAge", userAge);
+
+kcontext.getKnowledgeRuntime().insert(mpm);</script>
     </scriptTask>
     <businessRuleTask id="_jbpm-unique-5" name="AgeRule" g:ruleFlowGroup="EvalAgeCondition" >
       <ioSpecification>

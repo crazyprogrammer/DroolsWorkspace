@@ -5,7 +5,7 @@ public class MediclaimProcessModel {
 	public String userName;
 	public Integer userAge;
 	
-	public boolean userCoverage;
+	public boolean userCoverage = false;
 	public boolean result = false;	
 	
 	public int getUserAge() {
