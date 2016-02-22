@@ -12,7 +12,7 @@ import org.kie.api.runtime.KieSession;
  */
 public class MediclaimRuleTest {
 
-	public void Check(Object obj, String Ruleconfig) {
+	public void Check(MediclaimProcessModel obj, String Ruleconfig) {
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -22,9 +22,7 @@ public class MediclaimRuleTest {
 			ksession.insert(obj);
 			ksession.fireAllRules();
 			
-			
-			//MediclaimProcessModel mpm = new MediclaimProcessModel();
-			//System.out.println(mpm.getResult());
+			System.out.println(obj.getResult());
 			
 		} catch (Throwable t) {
 			t.printStackTrace();
