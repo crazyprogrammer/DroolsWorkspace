@@ -4,6 +4,7 @@ public class MediclaimProcessModel {
 
 	public String userName;
 	public Integer userAge;
+	public String gender;
 	
 	public boolean userCoverage = false;
 	public boolean result = false;	
@@ -13,6 +14,13 @@ public class MediclaimProcessModel {
 	}
 	public void setUserAge(Integer userAge) {
 		this.userAge = userAge;
+	}
+	
+	public String getUserSex() {
+		return gender;
+	}
+	public void setUserSex(String gender) {
+		this.gender = gender;
 	}
 	public String getUserName() {
 		return userName;

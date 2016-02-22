@@ -26,10 +26,13 @@ public class MediclaimRuleTest {
 			mpm.setUserName("Sudharshan");
 			mpm.setUserAge(26);
 			mpm.setUserCoverage(true);
+			mpm.setUserSex("M");
 			params.put("mpm", mpm);
 			
 			ksession.insert(mpm);
 			ksession.fireAllRules();
+			
+			System.out.println(mpm.getResult());
 			
 		} catch (Throwable t) {
 			t.printStackTrace();
