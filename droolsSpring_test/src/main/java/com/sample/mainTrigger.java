@@ -17,7 +17,7 @@ public class mainTrigger {
 
 		context = new ClassPathXmlApplicationContext("Beans.xml");
 	
-		MediclaimProcessModel obj = (MediclaimProcessModel) context.getBean("eval2");
+		MediclaimProcessModel obj = (MediclaimProcessModel) context.getBean("eval1");
 		
 		R1.Check(obj, "ksession-rules");
 	}
