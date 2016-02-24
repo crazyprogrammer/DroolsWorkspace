@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_userAge" structureRef="Integer" />
+  <itemDefinition id="_mpm" structureRef="com.mediclaim.MediclaimProcessModel" />
+  <itemDefinition id="null" structureRef="com.mediclaim.MediclaimProcessModel" />
+  <process processType="Private" isExecutable="true" id="test_BPMN" name="test_BPMN" tns:version="1" >
+
+    <!-- process variables -->
+    <property id="mpm" itemSubjectRef="null"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess"  isInterrupting="true">
+    </startEvent>
+    <endEvent id="_jbpm-unique-2" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <scriptTask id="_jbpm-unique-3" name="Say Hi !!" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println(" You have entered the script 1");
+
+System.out.println("Hi " + mpm.getUserName());
+System.out.println(" Your age is:  " + mpm.getUserAge());</script>
+    </scriptTask>
+    <scriptTask id="_jbpm-unique-6" name="Show Result" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println(" You have entered the script 3");
+
+System.out.println("Result is :  " + mpm.getResult());</script>
+    </scriptTask>
+    <scriptTask id="_jbpm-unique-0" name="Script_2" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println(" You have entered the script 2");
+
+	if(mpm.getUserCoverage() == true)
+			{
+				System.out.println(" You are covered");
+			}
+				else
+				{
+				System.out.println(" You are not covered");
+				}
+	
+	if(mpm.getUserCoverage() == true  &amp;&amp; mpm.getUserAge()&lt;30 &amp;&amp; mpm.getUserGender().equals("F"))
+			{
+				mpm.setResult(true);
+			}
+				else
+				{
+					mpm.setResult(false);
+				}
+</script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_jbpm-unique-6-_jbpm-unique-2" sourceRef="_jbpm-unique-6" targetRef="_jbpm-unique-2" />
+    <sequenceFlow id="_1-_jbpm-unique-3" sourceRef="_1" targetRef="_jbpm-unique-3" />
+    <sequenceFlow id="_jbpm-unique-0-_jbpm-unique-6" sourceRef="_jbpm-unique-0" targetRef="_jbpm-unique-6" />
+    <sequenceFlow id="_jbpm-unique-3-_jbpm-unique-0" sourceRef="_jbpm-unique-3" targetRef="_jbpm-unique-0" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="test_BPMN" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="169" y="24" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-2" >
+        <dc:Bounds x="178" y="370" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-3" >
+        <dc:Bounds x="152" y="97" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-6" >
+        <dc:Bounds x="138" y="298" width="121" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-0" >
+        <dc:Bounds x="132" y="169" width="128" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-6-_jbpm-unique-2" >
+        <di:waypoint x="198" y="322" />
+        <di:waypoint x="202" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_jbpm-unique-3" >
+        <di:waypoint x="193" y="48" />
+        <di:waypoint x="192" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-0-_jbpm-unique-6" >
+        <di:waypoint x="196" y="193" />
+        <di:waypoint x="198" y="322" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-3-_jbpm-unique-0" >
+        <di:waypoint x="192" y="121" />
+        <di:waypoint x="196" y="193" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
