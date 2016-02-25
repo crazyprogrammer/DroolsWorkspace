@@ -15,8 +15,12 @@
   <itemDefinition id="_userAge" structureRef="Integer" />
   <itemDefinition id="_mpm" structureRef="com.mediclaim.MediclaimProcessModel" />
   <itemDefinition id="null" structureRef="com.mediclaim.MediclaimProcessModel" />
+  <escalation id="Error_Message" escalationCode="Error_Message" />
   <process processType="Private" isExecutable="true" id="test_BPMN" name="test_BPMN" tns:version="1" >
 
+    <extensionElements>
+     <tns:import name="com.mediclaim.MediclaimProcessModel" />
+    </extensionElements>
     <!-- process variables -->
     <property id="mpm" itemSubjectRef="null"/>
 
@@ -32,11 +36,6 @@
 System.out.println("Hi " + mpm.getUserName());
 System.out.println(" Your age is:  " + mpm.getUserAge());</script>
     </scriptTask>
-    <scriptTask id="_jbpm-unique-6" name="Show Result" scriptFormat="http://www.java.com/java" >
-      <script>System.out.println(" You have entered the script 3");
-
-System.out.println("Result is :  " + mpm.getResult());</script>
-    </scriptTask>
     <scriptTask id="_jbpm-unique-0" name="Script_2" scriptFormat="http://www.java.com/java" >
       <script>System.out.println(" You have entered the script 2");
 
@@ -49,7 +48,12 @@ System.out.println("Result is :  " + mpm.getResult());</script>
 				System.out.println(" You are not covered");
 				}
 	
-	if(mpm.getUserCoverage() == true  &amp;&amp; mpm.getUserAge()&lt;30 &amp;&amp; mpm.getUserGender().equals("F"))
+	</script>
+    </scriptTask>
+    <scriptTask id="_jbpm-unique-4" name="Script_3" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("Entered the script 3");
+
+if(mpm.getUserCoverage() == true  &amp;&amp; mpm.getUserAge()&lt;30 &amp;&amp; mpm.getUserGender().equals("F"))
 			{
 				mpm.setResult(true);
 			}
@@ -59,47 +63,94 @@ System.out.println("Result is :  " + mpm.getResult());</script>
 				}
 </script>
     </scriptTask>
+    <exclusiveGateway id="_jbpm-unique-5" name="Eval_Gateway" gatewayDirection="Diverging" >
+    </exclusiveGateway>
+    <scriptTask id="_jbpm-unique-6" name="True" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("You are good to go");</script>
+    </scriptTask>
+    <scriptTask id="_jbpm-unique-7" name="False" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("Sorry you could don't fulfill all the required criteria");</script>
+    </scriptTask>
+    <endEvent id="_jbpm-unique-9" name="Error" >
+      <escalationEventDefinition escalationRef="Error_Message" />
+    </endEvent>
 
     <!-- connections -->
     <sequenceFlow id="_jbpm-unique-6-_jbpm-unique-2" sourceRef="_jbpm-unique-6" targetRef="_jbpm-unique-2" />
     <sequenceFlow id="_1-_jbpm-unique-3" sourceRef="_1" targetRef="_jbpm-unique-3" />
-    <sequenceFlow id="_jbpm-unique-0-_jbpm-unique-6" sourceRef="_jbpm-unique-0" targetRef="_jbpm-unique-6" />
     <sequenceFlow id="_jbpm-unique-3-_jbpm-unique-0" sourceRef="_jbpm-unique-3" targetRef="_jbpm-unique-0" />
+    <sequenceFlow id="_jbpm-unique-0-_jbpm-unique-4" sourceRef="_jbpm-unique-0" targetRef="_jbpm-unique-4" />
+    <sequenceFlow id="_jbpm-unique-4-_jbpm-unique-5" sourceRef="_jbpm-unique-4" targetRef="_jbpm-unique-5" />
+    <sequenceFlow id="_jbpm-unique-5-_jbpm-unique-6" sourceRef="_jbpm-unique-5" targetRef="_jbpm-unique-6" name="Case_True" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return mpm.result==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_jbpm-unique-5-_jbpm-unique-7" sourceRef="_jbpm-unique-5" targetRef="_jbpm-unique-7" name="Case_False" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return mpm.result==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_jbpm-unique-7-_jbpm-unique-9" sourceRef="_jbpm-unique-7" targetRef="_jbpm-unique-9" />
 
   </process>
 
   <bpmndi:BPMNDiagram>
     <bpmndi:BPMNPlane bpmnElement="test_BPMN" >
       <bpmndi:BPMNShape bpmnElement="_1" >
-        <dc:Bounds x="169" y="24" width="48" height="48" />
+        <dc:Bounds x="12" y="98" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-2" >
-        <dc:Bounds x="178" y="370" width="48" height="48" />
+        <dc:Bounds x="13" y="185" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-3" >
-        <dc:Bounds x="152" y="97" width="80" height="48" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-6" >
-        <dc:Bounds x="138" y="298" width="121" height="48" />
+        <dc:Bounds x="136" y="97" width="116" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_jbpm-unique-0" >
-        <dc:Bounds x="132" y="169" width="128" height="48" />
+        <dc:Bounds x="383" y="96" width="128" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-4" >
+        <dc:Bounds x="406" y="226" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-5" >
+        <dc:Bounds x="319" y="226" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-6" >
+        <dc:Bounds x="157" y="185" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-7" >
+        <dc:Bounds x="162" y="261" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_jbpm-unique-9" >
+        <dc:Bounds x="14" y="260" width="48" height="48" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-6-_jbpm-unique-2" >
-        <di:waypoint x="198" y="322" />
-        <di:waypoint x="202" y="394" />
+        <di:waypoint x="197" y="209" />
+        <di:waypoint x="37" y="209" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_1-_jbpm-unique-3" >
-        <di:waypoint x="193" y="48" />
-        <di:waypoint x="192" y="121" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-0-_jbpm-unique-6" >
-        <di:waypoint x="196" y="193" />
-        <di:waypoint x="198" y="322" />
+        <di:waypoint x="36" y="122" />
+        <di:waypoint x="194" y="121" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-3-_jbpm-unique-0" >
-        <di:waypoint x="192" y="121" />
-        <di:waypoint x="196" y="193" />
+        <di:waypoint x="194" y="121" />
+        <di:waypoint x="447" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-0-_jbpm-unique-4" >
+        <di:waypoint x="447" y="120" />
+        <di:waypoint x="446" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-4-_jbpm-unique-5" >
+        <di:waypoint x="446" y="250" />
+        <di:waypoint x="343" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-5-_jbpm-unique-6" >
+        <di:waypoint x="343" y="250" />
+        <di:waypoint x="197" y="209" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-5-_jbpm-unique-7" >
+        <di:waypoint x="343" y="250" />
+        <di:waypoint x="202" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_jbpm-unique-7-_jbpm-unique-9" >
+        <di:waypoint x="202" y="285" />
+        <di:waypoint x="38" y="284" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
